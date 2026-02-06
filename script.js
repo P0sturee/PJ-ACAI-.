@@ -1,89 +1,66 @@
-function alterarQtd(btn, delta) {
-  const produto = btn.closest('.produto');
-  const qtdSpan = produto.querySelector('.qtd');
-  let qtd = parseInt(qtdSpan.innerText);
+function alterarQtd(id, valor) {
+  const span = document.getElementById(id + "-qtd");
+  let qtd = parseInt(span.innerText);
+  qtd = Math.max(0, qtd + valor);
+  span.innerText = qtd;
+  calcularTotal();
+}
 
-  qtd = Math.max(0, qtd + delta);
-  qtdSpan.innerText = qtd;
-
-  const unidadesDiv = produto.querySelector('.unidades');
-  unidadesDiv.innerHTML = '';
-
-  const tipo = produto.dataset.tipo;
-
-  const ingredientesBatido = [
-    'Leite em pó',
-    'Creme de avelã',
-    'Leite condensado',
-    'Calda de morango'
-  ];
-
-  const ingredientesPote = [
-    'Leite em pó',
-    'Chocoball',
-    'Confetes',
-    'Creme de avelã',
-    'Leite condensado',
-    'Calda de morango'
-  ];
-
-  const listaIngredientes = tipo === 'batido'
-    ? ingredientesBatido
-    : ingredientesPote;
-
-  for (let i = 1; i <= qtd; i++) {
-    const unidade = document.createElement('div');
-    unidade.className = 'unidade';
-    unidade.innerHTML = `<strong>🥣 Unidade ${i}</strong>`;
-
-    listaIngredientes.forEach(item => {
-      const opcao = document.createElement('label');
-      opcao.className = 'opcao';
-      opcao.innerHTML = `<input type="checkbox" value="${item}"> ${item}`;
-      unidade.appendChild(opcao);
-    });
-
-    if (produto.dataset.talher) {
-      const talher = document.createElement('label');
-      talher.className = 'opcao';
-      talher.innerHTML = `<input type="checkbox" value="Talher"> Acompanhar talher`;
-      unidade.appendChild(talher);
-    }
-
-    unidadesDiv.appendChild(unidade);
-  }
+function calcularTotal() {
+  let total = 0;
+  document.querySelectorAll(".produto").forEach(p => {
+    const id = p.dataset.id;
+    const preco = parseFloat(p.dataset.preco);
+    const qtd = parseInt(document.getElementById(id + "-qtd").innerText);
+    total += preco * qtd;
+  });
+  document.getElementById("total").innerText = total.toFixed(2);
 }
 
 function finalizarPedido() {
-  const endereco = document.getElementById('endereco').value;
-  let msg = '🍧 *Pedido PJ AÇAÍ* 🍧%0A%0A';
+  const endereco = document.getElementById("endereco").value.trim();
+  if (!endereco) {
+    alert("Informe o endereço de entrega");
+    return;
+  }
 
-  document.querySelectorAll('.produto').forEach(produto => {
-    const qtd = parseInt(produto.querySelector('.qtd').innerText);
-    if (qtd > 0) {
-      msg += `📦 *${produto.dataset.nome}* x${qtd}%0A`;
+  let msg = "🍧 *Pedido PJ AÇAÍ* 🍧\n\n";
+  let temPedido = false;
 
-      const unidades = produto.querySelectorAll('.unidade');
-      unidades.forEach((unidade, index) => {
-        const extras = [];
-        unidade.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
-          extras.push(cb.value);
-        });
+  document.querySelectorAll(".produto").forEach(p => {
+    const id = p.dataset.id;
+    const nome = p.dataset.nome;
+    const qtd = parseInt(document.getElementById(id + "-qtd").innerText);
+    if (qtd === 0) return;
 
-        if (extras.length > 0) {
-          msg += `   ➕ Unidade ${index + 1}: ${extras.join(', ')}%0A`;
-        }
-      });
-
-      msg += '%0A';
+    if (p.dataset.fruta === "true") {
+      const fruta = p.querySelector("input[type=radio]:checked");
+      if (!fruta) {
+        alert("Escolha a fruta da batida");
+        throw "erro";
+      }
+      msg += `🍹 *${nome}* x${qtd}\n🍓 Fruta: ${fruta.value}\n`;
+    } else {
+      msg += `🍧 *${nome}* x${qtd}\n`;
     }
+
+    p.querySelectorAll("input[type=checkbox]:checked").forEach(i => {
+      msg += `➕ ${i.value}\n`;
+    });
+
+    msg += "\n";
+    temPedido = true;
   });
 
-  msg += `📍 *Endereço:* ${endereco}%0A`;
-  msg += `💳 *Pagamento:* PIX`;
+  if (!temPedido) {
+    alert("Adicione pelo menos um item");
+    return;
+  }
+
+  msg += `📍 *Endereço:*\n${endereco}\n\n💰 *Total:* R$ ${document.getElementById("total").innerText}\n🚚 Frete calculado à parte\n💜 *Pagamento:* PIX`;
 
   window.open(
-    `https://wa.me/5541995647320?text=${msg}`,
-    '_blank'
+    "https://wa.me/554195758534?text=" + encodeURIComponent(msg),
+    "_blank"
   );
 }
