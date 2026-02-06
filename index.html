@@ -8,117 +8,132 @@
 </head>
 <body>
 
-<header class="banner">
+<header class="topo">
   <h1>PJ AÇAÍ</h1>
-  <a class="insta" href="https://www.instagram.com/pjacai.oficial?igsh=aXVtOWdjNWdqOGRt" target="_blank">
+  <a class="instagram" href="https://www.instagram.com/pjacai.oficial?igsh=aXVtOWdjNWdqOGRt" target="_blank">
     Instagram
   </a>
 </header>
 
 <main>
 
-<!-- AÇAÍ BATIDO -->
-<section class="produto" data-id="acai300" data-nome="Açaí Batido 300ml" data-preco="18">
-  <h2>🍧 Açaí Batido 300ml <span>R$18</span></h2>
-  <div class="quantidade">
-    <button onclick="alterarQtd('acai300',-1)">−</button>
-    <span id="acai300-qtd">0</span>
-    <button onclick="alterarQtd('acai300',1)">+</button>
-  </div>
-  <div class="opcoes">
-    <label><input type="checkbox" value="Leite em pó"> Leite em pó</label>
-    <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
-    <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
-    <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
-    <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
-  </div>
-</section>
+  <!-- AÇAÍ BATIDO -->
+  <section class="produto" data-nome="Açaí Batido 300ml" data-preco="18">
+    <h2>🍇 Açaí Batido 300ml — R$18</h2>
 
-<section class="produto" data-id="acai500" data-nome="Açaí Batido 500ml" data-preco="22">
-  <h2>🍧 Açaí Batido 500ml <span>R$22</span></h2>
-  <div class="quantidade">
-    <button onclick="alterarQtd('acai500',-1)">−</button>
-    <span id="acai500-qtd">0</span>
-    <button onclick="alterarQtd('acai500',1)">+</button>
-  </div>
-  <div class="opcoes">
-    <label><input type="checkbox" value="Leite em pó"> Leite em pó</label>
-    <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
-    <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
-    <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
-    <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
-  </div>
-</section>
+    <div class="quantidade">
+      <button onclick="alterarQtd(this, -1)">−</button>
+      <span>0</span>
+      <button onclick="alterarQtd(this, 1)">+</button>
+    </div>
 
-<!-- BATIDA DE FRUTAS -->
-<section class="produto" data-id="batida300" data-nome="Batida de Frutas 300ml" data-preco="12" data-fruta="true">
-  <h2>🍹 Batida de Frutas 300ml <span>R$12</span></h2>
-  <div class="quantidade">
-    <button onclick="alterarQtd('batida300',-1)">−</button>
-    <span id="batida300-qtd">0</span>
-    <button onclick="alterarQtd('batida300',1)">+</button>
-  </div>
-  <div class="opcoes">
-    <strong>Escolha a fruta</strong>
-    <label><input type="radio" name="fruta300" value="Morango"> Morango</label>
-    <label><input type="radio" name="fruta300" value="Abacaxi"> Abacaxi</label>
-    <label><input type="radio" name="fruta300" value="Maracujá"> Maracujá</label>
-    <hr>
-    <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
-    <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
-    <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
-    <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
-  </div>
-</section>
+    <div class="adicionais">
+      <label><input type="checkbox" value="Leite em pó"> Leite em pó</label>
+      <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
+      <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+      <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
+      <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
+    </div>
+  </section>
 
-<section class="produto" data-id="batida500" data-nome="Batida de Frutas 500ml" data-preco="16" data-fruta="true">
-  <h2>🍹 Batida de Frutas 500ml <span>R$16</span></h2>
-  <div class="quantidade">
-    <button onclick="alterarQtd('batida500',-1)">−</button>
-    <span id="batida500-qtd">0</span>
-    <button onclick="alterarQtd('batida500',1)">+</button>
-  </div>
-  <div class="opcoes">
-    <strong>Escolha a fruta</strong>
-    <label><input type="radio" name="fruta500" value="Morango"> Morango</label>
-    <label><input type="radio" name="fruta500" value="Abacaxi"> Abacaxi</label>
-    <label><input type="radio" name="fruta500" value="Maracujá"> Maracujá</label>
-    <hr>
-    <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
-    <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
-    <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
-    <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
-  </div>
-</section>
+  <section class="produto" data-nome="Açaí Batido 500ml" data-preco="22">
+    <h2>🍇 Açaí Batido 500ml — R$22</h2>
 
-<!-- POTE -->
-<section class="produto" data-id="pote500" data-nome="Pote de Açaí 500ml" data-preco="25">
-  <h2>🧊 Pote de Açaí 500ml <span>R$25</span></h2>
-  <div class="quantidade">
-    <button onclick="alterarQtd('pote500',-1)">−</button>
-    <span id="pote500-qtd">0</span>
-    <button onclick="alterarQtd('pote500',1)">+</button>
-  </div>
-  <div class="opcoes">
-    <label><input type="checkbox" value="Leite em pó"> Leite em pó</label>
-    <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
-    <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
-    <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
-    <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
-    <label><input type="checkbox" value="Chocoball"> Chocoball</label>
-    <label><input type="checkbox" value="Confete"> Confete</label>
-  </div>
-</section>
+    <div class="quantidade">
+      <button onclick="alterarQtd(this, -1)">−</button>
+      <span>0</span>
+      <button onclick="alterarQtd(this, 1)">+</button>
+    </div>
 
-<section class="checkout">
-  <textarea id="endereco" placeholder="📍 Endereço de entrega"></textarea>
-  <div class="resumo">Total: R$ <span id="total">0</span></div>
-  <p class="frete">🚚 Frete calculado após o pedido</p>
+    <div class="adicionais">
+      <label><input type="checkbox" value="Leite em pó"> Leite em pó</label>
+      <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
+      <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+      <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
+      <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
+    </div>
+  </section>
+
+  <!-- BATIDA DE FRUTAS -->
+  <section class="produto" data-nome="Batida de Frutas 300ml" data-preco="12">
+    <h2>🍓 Batida de Frutas 300ml — R$12</h2>
+
+    <select class="fruta">
+      <option value="">Escolha a fruta</option>
+      <option>Morango</option>
+      <option>Abacaxi</option>
+      <option>Maracujá</option>
+    </select>
+
+    <div class="quantidade">
+      <button onclick="alterarQtd(this, -1)">−</button>
+      <span>0</span>
+      <button onclick="alterarQtd(this, 1)">+</button>
+    </div>
+
+    <div class="adicionais">
+      <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
+      <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+      <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
+      <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
+    </div>
+  </section>
+
+  <section class="produto" data-nome="Batida de Frutas 500ml" data-preco="16">
+    <h2>🍓 Batida de Frutas 500ml — R$16</h2>
+
+    <select class="fruta">
+      <option value="">Escolha a fruta</option>
+      <option>Morango</option>
+      <option>Abacaxi</option>
+      <option>Maracujá</option>
+    </select>
+
+    <div class="quantidade">
+      <button onclick="alterarQtd(this, -1)">−</button>
+      <span>0</span>
+      <button onclick="alterarQtd(this, 1)">+</button>
+    </div>
+
+    <div class="adicionais">
+      <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
+      <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+      <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
+      <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
+    </div>
+  </section>
+
+  <!-- POTE -->
+  <section class="produto" data-nome="Pote de Açaí 500ml" data-preco="25">
+    <h2>🧊 Pote de Açaí 500ml — R$25</h2>
+
+    <div class="quantidade">
+      <button onclick="alterarQtd(this, -1)">−</button>
+      <span>0</span>
+      <button onclick="alterarQtd(this, 1)">+</button>
+    </div>
+
+    <div class="adicionais">
+      <label><input type="checkbox" value="Leite em pó"> Leite em pó</label>
+      <label><input type="checkbox" value="Creme de avelã"> Creme de avelã</label>
+      <label><input type="checkbox" value="Leite condensado"> Leite condensado</label>
+      <label><input type="checkbox" value="Calda de morango"> Calda de morango</label>
+      <label><input type="checkbox" value="Calda de chocolate"> Calda de chocolate</label>
+      <label><input type="checkbox" value="Chocoball"> Chocoball</label>
+      <label><input type="checkbox" value="Confete"> Confete</label>
+    </div>
+  </section>
+
+  <input id="endereco" placeholder="📍 Endereço de entrega (frete calculado após)" />
+
   <div class="pix">💜 Pagamento via PIX</div>
-  <button onclick="finalizarPedido()">Finalizar pedido</button>
-</section>
+
+  <p class="frete">🚚 Frete calculado após o pedido</p>
+
+  <button class="finalizar" onclick="finalizarPedido()">Finalizar pedido</button>
 
 </main>
+
 <script src="script.js"></script>
 </body>
 </html>
