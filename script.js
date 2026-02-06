@@ -1,66 +1,39 @@
-function alterarQtd(id, valor) {
-  const span = document.getElementById(id + "-qtd");
+function alterarQtd(btn, valor) {
+  const span = btn.parentElement.querySelector("span");
   let qtd = parseInt(span.innerText);
   qtd = Math.max(0, qtd + valor);
   span.innerText = qtd;
-  calcularTotal();
-}
-
-function calcularTotal() {
-  let total = 0;
-  document.querySelectorAll(".produto").forEach(p => {
-    const id = p.dataset.id;
-    const preco = parseFloat(p.dataset.preco);
-    const qtd = parseInt(document.getElementById(id + "-qtd").innerText);
-    total += preco * qtd;
-  });
-  document.getElementById("total").innerText = total.toFixed(2);
 }
 
 function finalizarPedido() {
-  const endereco = document.getElementById("endereco").value.trim();
-  if (!endereco) {
-    alert("Informe o endereço de entrega");
-    return;
-  }
-
   let msg = "🍧 *Pedido PJ AÇAÍ* 🍧\n\n";
-  let temPedido = false;
+  let total = 0;
 
   document.querySelectorAll(".produto").forEach(p => {
-    const id = p.dataset.id;
-    const nome = p.dataset.nome;
-    const qtd = parseInt(document.getElementById(id + "-qtd").innerText);
-    if (qtd === 0) return;
+    const qtd = parseInt(p.querySelector(".quantidade span").innerText);
+    if (qtd > 0) {
+      const nome = p.dataset.nome;
+      const preco = parseFloat(p.dataset.preco);
+      total += preco * qtd;
 
-    if (p.dataset.fruta === "true") {
-      const fruta = p.querySelector("input[type=radio]:checked");
-      if (!fruta) {
-        alert("Escolha a fruta da batida");
-        throw "erro";
-      }
-      msg += `🍹 *${nome}* x${qtd}\n🍓 Fruta: ${fruta.value}\n`;
-    } else {
-      msg += `🍧 *${nome}* x${qtd}\n`;
+      msg += `• ${nome} x${qtd}\n`;
+
+      const fruta = p.querySelector(".fruta");
+      if (fruta && fruta.value) msg += `  🍓 Fruta: ${fruta.value}\n`;
+
+      const extras = [...p.querySelectorAll("input:checked")].map(e => e.value);
+      if (extras.length) msg += `  ➕ Extras: ${extras.join(", ")}\n`;
+
+      msg += "\n";
     }
-
-    p.querySelectorAll("input[type=checkbox]:checked").forEach(i => {
-      msg += `➕ ${i.value}\n`;
-    });
-
-    msg += "\n";
-    temPedido = true;
   });
 
-  if (!temPedido) {
-    alert("Adicione pelo menos um item");
-    return;
-  }
+  const endereco = document.getElementById("endereco").value;
+  msg += `📍 Endereço: ${endereco || "Não informado"}\n\n`;
+  msg += `💜 Pagamento: PIX\n`;
+  msg += `🚚 Frete calculado após o pedido\n\n`;
+  msg += `💰 Total: R$ ${total.toFixed(2)}`;
 
-  msg += `📍 *Endereço:*\n${endereco}\n\n💰 *Total:* R$ ${document.getElementById("total").innerText}\n🚚 Frete calculado à parte\n💜 *Pagamento:* PIX`;
-
-  window.open(
-    "https://wa.me/554195758534?text=" + encodeURIComponent(msg),
-    "_blank"
-  );
+  const numero = "554195758534";
+  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`);
 }
