@@ -1,39 +1,56 @@
-function alterarQtd(btn, valor) {
-  const span = btn.parentElement.querySelector("span");
-  let qtd = parseInt(span.innerText);
-  qtd = Math.max(0, qtd + valor);
-  span.innerText = qtd;
+function alterarQtd(btn, delta) {
+  const produto = btn.closest('.produto');
+  const qtdSpan = produto.querySelector('.qtd');
+  let qtd = parseInt(qtdSpan.innerText);
+  qtd = Math.max(0, qtd + delta);
+  qtdSpan.innerText = qtd;
+
+  const unidadesDiv = produto.querySelector('.unidades');
+  unidadesDiv.innerHTML = '';
+
+  const tipo = produto.dataset.tipo;
+
+  for (let i = 1; i <= qtd; i++) {
+    const unidade = document.createElement('div');
+    unidade.className = 'unidade';
+    unidade.innerHTML = `<strong>Unidade ${i}</strong>`;
+
+    if (tipo === 'fruta') {
+      unidade.innerHTML += `
+        <p>Escolha 1 fruta:</p>
+        <label class="opcao"><input type="radio" name="fruta-${produto.dataset.nome}-${i}"> Morango</label>
+        <label class="opcao"><input type="radio" name="fruta-${produto.dataset.nome}-${i}"> Abacaxi</label>
+        <label class="opcao"><input type="radio" name="fruta-${produto.dataset.nome}-${i}"> Maracujá</label>
+      `;
+    }
+
+    const extras = tipo === 'pote'
+      ? ['Leite em pó','Creme de avelã','Leite condensado','Calda de morango','Calda de chocolate','Chocoball','Confete']
+      : ['Leite em pó','Creme de avelã','Leite condensado','Calda de morango','Calda de chocolate'];
+
+    extras.forEach(e => {
+      unidade.innerHTML += `<label class="opcao"><input type="checkbox"> ${e}</label>`;
+    });
+
+    unidadesDiv.appendChild(unidade);
+  }
 }
 
 function finalizarPedido() {
-  let msg = "🍧 *Pedido PJ AÇAÍ* 🍧\n\n";
-  let total = 0;
+  const endereco = document.getElementById('endereco').value.trim();
+  if (!endereco) {
+    alert('Informe o endereço para entrega');
+    return;
+  }
 
-  document.querySelectorAll(".produto").forEach(p => {
-    const qtd = parseInt(p.querySelector(".quantidade span").innerText);
-    if (qtd > 0) {
-      const nome = p.dataset.nome;
-      const preco = parseFloat(p.dataset.preco);
-      total += preco * qtd;
+  let msg = 'Pedido PJ AÇAÍ:%0A%0A';
 
-      msg += `• ${nome} x${qtd}\n`;
-
-      const fruta = p.querySelector(".fruta");
-      if (fruta && fruta.value) msg += `  🍓 Fruta: ${fruta.value}\n`;
-
-      const extras = [...p.querySelectorAll("input:checked")].map(e => e.value);
-      if (extras.length) msg += `  ➕ Extras: ${extras.join(", ")}\n`;
-
-      msg += "\n";
-    }
+  document.querySelectorAll('.produto').forEach(p => {
+    const qtd = p.querySelector('.qtd').innerText;
+    if (qtd > 0) msg += `${p.dataset.nome} x${qtd}%0A`;
   });
 
-  const endereco = document.getElementById("endereco").value;
-  msg += `📍 Endereço: ${endereco || "Não informado"}\n\n`;
-  msg += `💜 Pagamento: PIX\n`;
-  msg += `🚚 Frete calculado após o pedido\n\n`;
-  msg += `💰 Total: R$ ${total.toFixed(2)}`;
+  msg += `%0AEndereço: ${endereco}%0APagamento: PIX`;
 
-  const numero = "554195758534";
-  window.open(`https://wa.me/${numero}?text=${encodeURIComponent(msg)}`);
+  window.open('https://wa.me/5541995758534?text=' + msg, '_blank');
 }
