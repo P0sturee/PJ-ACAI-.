@@ -1,87 +1,98 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f6f6f6;
-  margin: 0;
-}
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
 
-.topo {
-  background: #5b0f8b;
-  color: white;
-  padding: 15px;
-  text-align: center;
+body { margin:0; background:#f2f2f2; }
+
+.header {
+  background: linear-gradient(135deg,#5a189a,#7b2cbf);
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  position:relative;
 }
 
 .instagram {
-  color: white;
-  text-decoration: underline;
-  font-size: 14px;
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
 }
 
-main {
-  padding: 15px;
+.instagram svg {
+  width:26px;
+  height:26px;
+  fill:white;
 }
+
+main { max-width:480px; margin:auto; }
 
 .produto {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
+  background:#fff;
+  margin:14px;
+  padding:16px;
+  border-radius:14px;
 }
 
-.quantidade {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 10px 0;
+.controle {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin:12px 0;
 }
 
-.quantidade button {
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+.controle button {
+  width:44px;
+  height:44px;
+  border:none;
+  border-radius:50%;
+  background:#7b2cbf;
+  color:#fff;
+  font-size:22px;
 }
 
-.adicionais {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin-top: 10px;
+.unidade {
+  background:#fafafa;
+  margin-top:12px;
+  padding:12px;
+  border-radius:12px;
 }
 
-.adicionais label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.opcao {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 0;
 }
 
-.fruta, #endereco {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+.final {
+  background:#fff;
+  margin:14px;
+  padding:16px;
+  border-radius:14px;
 }
+
+.final input {
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+.alerta { margin:10px 0; font-size:14px; }
 
 .pix {
-  background: #ede1ff;
-  padding: 12px;
-  border-radius: 10px;
-  margin-top: 10px;
-  text-align: center;
-  font-weight: bold;
+  background:#e9d5ff;
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
+  margin-bottom:12px;
 }
 
-.frete {
-  text-align: center;
-  font-size: 14px;
-  margin-top: 8px;
-}
-
-.finalizar {
-  width: 100%;
-  padding: 15px;
-  background: #5b0f8b;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  margin-top: 15px;
+.final button {
+  width:100%;
+  padding:16px;
+  background:#25d366;
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  font-size:18px;
 }
